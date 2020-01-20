@@ -1,0 +1,23 @@
+SALDO BANCOS:
+Passo 1 -> listar extratos
+Passo 2 -> consultar extratos => soma valor_fluxo
+
+DATA VCTO = 13/01
+3 dias do vencimento vai para inadimplencia
+CONTAS A RECEBER <=3 dias (a partir do dia atual)
+lista_despesas -> exceto liquidado do - dia 10 em diante
+
+INADIMPLENCIA > 3 DIAS antes do dia 10
+
+
+CONTAS A RECEBER
+lista_receita
+consultar_receita
+
+-------------
+Do dia
+DESPESAS 
+A RECEBER
+
+Classificar por categoria
+data_emissao -> dia corrente

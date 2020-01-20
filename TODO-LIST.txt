@@ -1,0 +1,24 @@
+[ pesquisar e resolver individualmente, com a supervisão do Rafael ]
+
+DONE -> - novas rotas para link, unlink e replace tag dentro de PostsController
+DONE ->	link_tag, vincula uma tag específica (tag_id) ao post (não cria uma tag nova! ela já deve existir.)
+DONE ->	unlink_tag, remove o vínculo de uma tag específica (tag_id) do post (não exclui a tag! apenas remove o vínculo.)
+DONE ->	replace_tags, substitui todas as tags vinculadas ao post por um novo conjunto (tag_ids, múltiplos ids na mesma requisição)
+- tags/index
+DONE ->	retornar somente [:id, :name]
+- tags/show
+DONE ->	continuar exibindo todos os atributos
+DONE -> - posts/show, retornar:
+	+ [:id, :title, :description, :created_at, :updated_at]
+	+ :comments [:id, :name, :created_at] (somente os associados ao post)
+	+ :tags [:id, :name] (somente as vinculadas ao post)
+
+[ pesquisar e resolver em conjunto/grupo, com a supervisão do Rafael ]
+DONE -> - implementar filtros em posts/index
+  DONE ->	por título
+	DONE -> por descrição
+	DONE -> por tag
+	DONE -> por comentário (:text)
+- retornar posts/index paginados em n registros (page / per_page)
+
+
