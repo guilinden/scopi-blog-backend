@@ -8,6 +8,7 @@ class Post < ApplicationRecord
 
 	def index_info
 			{
+				id: self.id,
 				title: self.title,
 				description: self.description,
 				user: self.user,
