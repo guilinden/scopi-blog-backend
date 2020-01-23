@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   #patch "/posts/:id", to: "posts#update"
   post "/comments/:id", to: "comments#link_comments"
   put "/posts/:id/tags", to: "posts#replace_tags"
-  delete "/posts/:id/tags", to: "posts#unlink_tag"
+  delete "/posts/:id/tags/:tag_id", to: "posts#unlink_tag"
   resources :posts, except: [:new, :edit] do
     resources :comments, except: [:new, :edit]
   end

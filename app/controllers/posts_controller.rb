@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
 	before_action :set_post, only: [:show,:update,:destroy, :show_tags, :link_tag, :unlink_tag, :replace_tags]
 	before_action :set_tag, only: [:unlink_tag, :link_tag]
-	
+
 
 	#Posts.join(:comments).All Select todos os posts com seus comentários usando JOIN
-	
+
 	#GET / & /posts Politics
 	def index
 		@per_page = request.headers["perPage"]
@@ -15,9 +15,9 @@ class PostsController < ApplicationController
 
 		@posts = @posts.where(title: request.headers["title"]) if request.headers["title"]
 		@posts = @posts.where(description: request.headers["description"]) if request.headers["description"]
-		@posts = @posts.joins(:comments).where('comments.text' => "#{request.headers["comment"]}") if request.headers["comment"]  
+		@posts = @posts.joins(:comments).where('comments.text' => "#{request.headers["comment"]}") if request.headers["comment"]
 		@posts = @posts.joins(:tags).where('tags.name = ?',request.headers["tag"]) if request.headers["tag"]
-		
+
 		render json: {posts: @posts.list, post_count: post_count}
 	end
 
@@ -33,9 +33,9 @@ class PostsController < ApplicationController
 
 	#GET /posts/:id
 	def show
-		render json: @post.index_info 
+		render json: @post.index_info
 	end
-	
+
 	#PATCH/PUT /posts/:id
 	def update
 		if @post.update post_params
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
 			render json: @post.errors, status: :unprocessable_entity
 		end
 	end
-	
+
 	#DELETE /posts/:id
 	def destroy
 		@post.destroy
@@ -53,7 +53,6 @@ class PostsController < ApplicationController
 
 	#POST /posts/:id/tags/
 	def link_tag
-		
 		@post.tags.push @tag
 		render json: @post.tags, status: :ok
 	end
@@ -74,7 +73,7 @@ class PostsController < ApplicationController
 		@post.tags.delete_all
 		@tag_ids = tag_params[:tag_ids]
 		@tag_ids.each do |id|
-			tag = Tag.find id	
+			tag = Tag.find id
 			@post.tags.push tag if tag
 		end
 		render json: @post.tags
@@ -82,9 +81,9 @@ class PostsController < ApplicationController
 
 	private
 	def post_params
-		params.require(:post).permit(:title,:description,:user_id,:test,:filter => [:title])
+		params.require(:post).permit(:title,:description,:user_id,:test,:filter => [:title],:tag_ids => [], :tags => [])
 	end
-		
+
 	def tag_params
 		params.require(:post).permit(:tag_id,:tag_ids => [])
 	end

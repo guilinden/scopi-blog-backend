@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
-	has_many :comments
-	has_and_belongs_to_many :tags
+	has_many :comments, :dependent => :delete_all
+	has_and_belongs_to_many :tags, :dependent => :delete_all
 	belongs_to :user
 
 	validates :title, length: {within: 1..255}, uniqueness: true
