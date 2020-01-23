@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
-	has_many :comments, :dependent => :delete_all
-	has_and_belongs_to_many :tags, :dependent => :delete_all
+	has_many :comments, :dependent => :destroy
+	has_and_belongs_to_many :tags, :dependent => :destroy
 	belongs_to :user
 
 	validates :title, length: {within: 1..255}, uniqueness: true
@@ -18,8 +18,8 @@ class Post < ApplicationRecord
 				updated_at: self.updated_at,
 			}
 	end
-	
-	def self.list 
+
+	def self.list
 		Post.all().preload(:comments,:tags).map do |post|
 			post.index_info
 		end
@@ -27,9 +27,9 @@ class Post < ApplicationRecord
 
 	def info
 		all_comments = []
-		self.comments.each do |comment| 
+		self.comments.each do |comment|
 			if comment.comment_id == nil
-				comment_formated = comment.all_info 
+				comment_formated = comment.all_info
 				all_comments.push(comment_formated)
 			end
 		end

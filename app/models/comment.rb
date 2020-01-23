@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   validates :text, presence: true
   belongs_to :comment, optional: true
-  has_many :comments
+  has_many :comments, :dependent => :destroy
 
 
   def all_info
@@ -15,7 +15,7 @@ class Comment < ApplicationRecord
     }
   end
 
-  def comment_info	
+  def comment_info
       recursive_list = []
       linked_comments = Comment.all.where("comment_id = #{self.id}")
       linked_comments.each do |c|
