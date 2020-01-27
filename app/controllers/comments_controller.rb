@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
 	#DELETE /posts/:post_id/comments/:id
 	def destroy
 		@comment.destroy
-		render json: {"Message": "Comment #{params[:id]} deleted"}
+		render json: {data: @post.info, "Message": "Comment #{params[:id]} deleted"}
 	end
 
 	#PUT/PATCH /posts/:post_id/comments/:id
