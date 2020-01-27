@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
       id: self.id,
       text: self.text,
       user: self.user,
-      linked_comments: self.comment_info
+      comments: self.comment_info
     }
   end
 

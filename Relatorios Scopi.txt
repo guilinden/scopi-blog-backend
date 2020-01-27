@@ -1,3 +1,15 @@
+SALDO BANCOS = XXX
+CONTAS A RECEBER = XXX
+CONTAS A PAGAR = - XXX
+= SALDO DO FLUXO
+
++ INADIMPLÊNCIA (>3 dias)
+
+= SALDO TOTAL
+
+
+
+
 SALDO BANCOS:
 Passo 1 -> listar extratos
 Passo 2 -> consultar extratos => soma valor_fluxo

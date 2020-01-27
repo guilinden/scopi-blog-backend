@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
 	def create
 		@comment = @post.comments.new(comment_params)
 		if @comment.save
-			render json: @comment, status: :created
+			render json: @post.info, status: :created
 		else
 			render json: @comment.errors, status: :unprocessable_entity
 		end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
 
 	#DELETE /posts/:post_id/comments/:id
 	def destroy
-		@comment.destroy 
+		@comment.destroy
 		render json: {"Message": "Comment #{params[:id]} deleted"}
 	end
 
@@ -45,12 +45,12 @@ class CommentsController < ApplicationController
 		@comment.update comment_id: comment_params[:comment_id]
 		#@comment.save
 	end
-	
+
 	private
 	def comment_params
 		params.require(:comment).permit(:text,:comment_id,:user_id)
 	end
-	
+
 	def set_post
 		@post = Post.find params[:post_id]
 	end
