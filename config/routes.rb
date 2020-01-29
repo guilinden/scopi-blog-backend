@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "/comments/:id", to: "comments#link_comments"
   put "/posts/:id/tags", to: "posts#replace_tags"
   delete "/posts/:id/tags/:tag_id", to: "posts#unlink_tag"
+  post '/auth/login', to: 'authentication#login'
   resources :posts, except: [:new, :edit] do
     resources :comments, except: [:new, :edit]
   end
