@@ -10,14 +10,13 @@ class PostsController < ApplicationController
 		@per_page = request.headers["perPage"]
 		@page = request.headers["page"]
 		@posts = Post.all
-		post_count = @posts.size
 		@posts = @posts.paginate(page:@page, per_page: @per_page)
 
 		@posts = @posts.where(title: request.headers["title"]) if request.headers["title"]
 		@posts = @posts.where(description: request.headers["description"]) if request.headers["description"]
 		@posts = @posts.joins(:comments).where('comments.text' => "#{request.headers["comment"]}") if request.headers["comment"]
 		@posts = @posts.joins(:tags).where('tags.name = ?',request.headers["tag"]) if request.headers["tag"]
-
+		post_count = @posts.size
 		render json: {posts: @posts.list, post_count: post_count}
 	end
 
